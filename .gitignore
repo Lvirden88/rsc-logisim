@@ -1,0 +1,29 @@
+# ======================
+# Operating system files
+# ======================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ======================
+# Editor / IDE files
+# ======================
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# ======================
+# Build artifacts (future-proofing)
+# ======================
+build/
+bin/
+*.o
+*.obj
+*.exe
+*.out
+
+# ======================
+# Logs
+# ======================
+*.log
