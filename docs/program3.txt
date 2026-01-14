@@ -1,0 +1,59 @@
+;Lisa Virden
+;Program3.txt
+;Parity Checker - Check if a number has an even or odd number of 1-bits.
+;Output: 0 if N has an even parity, 1 if N has odd parity
+
+
+
+JMP start    	;Jump to start label
+
+;Variables
+one:    1	;constant 1 for toggling
+N:      7	;input any number in hexadecimal to test parity
+tempN:  0	;working copy of N to be shifted, initialized to 0
+parity: 0	;parity result, initialized to even
+
+start:
+	LDAC N       ;ACC = N
+	STAC tempN   ;load ACC(N) into tempN variable to be modified
+
+loop:
+	;If temp == 0, we are done checking bits
+	LDAC tempN   ;ACC = tempN
+	JMPZ done    ;if ACC == 0, exit loop
+
+	;Get least significant bit
+	LDAC tempN   ;ACC = tempN
+	MVAC 	     ;R = tempN
+	LDAC one     ;ACC = one
+	AND	     ;ACC = one AND tempN (LSB: 0 or 1)
+	
+	;if LSB == 0, do not flip parity
+	JMPZ no_flip ;if ACC == 0, no change to parity
+
+	;if LSB == 1, flip parity
+	LDAC one     ; ACC = 1
+	MVAC         ; R = 1
+	LDAC parity  ; ACC = parity
+	NOT          ; ACC = !parity
+	AND          ; ACC = (!parity) AND 1
+	STAC parity  ; store updated parity
+
+no_flip:
+	LDAC tempN   ;ACC = tempN
+	ASHR	     ;ACC = tempN >> 1
+	STAC tempN   ;store tempN >> 1 in memory
+	
+	JMP loop     ;Repeat loop for next bit
+
+done:
+	LDAC parity  ;ACC = 0 (even) or 1 (odd)
+	OUT	     ;Send ACC to Output Register
+	HALT	     ;stop program execution
+	
+	
+	
+
+
+
+

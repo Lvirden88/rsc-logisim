@@ -1,0 +1,77 @@
+;Lisa Virden
+;program2.txt
+;Perform operations, store each result in separate memory address, and display each value. (in hex)
+
+JMP start    ;Jump to 'start' label 
+
+;Input Variables
+varA9: A9
+var2B: 2B
+varAF: AF
+varD1: D1
+
+;Result variables
+A9_add_2B: 0
+A9_sub_2B: 0
+2B_add_2B: 0
+A9_and_2B: 0
+A9_or_2B: 0
+A9_ashr: 0
+AF_inc: 0
+D1_not: 0
+
+start:
+	LDAC varA9      ;ACC = varA9
+	MVAC 		;R = varA9
+	LDAC var2B	;ACC = var2B
+	ADD		;ACC = var2B + varA9
+	STAC A9_add_2B	;Store ACC in A9_add_2B
+	OUT		;Display ACC
+
+	LDAC var2B	;ACC = var2B
+	MVAC		;R = var2B
+	LDAC varA9	;ACC = varA9
+	SUB		;ACC = varA9 - var2B
+	STAC A9_sub_2B	;Store ACC in A9_sub_2B
+	OUT		;Display ACC
+
+	LDAC var2B	;ACC = var2B
+	CLAC		;Clear ACC = 0
+	MOVR		;Move R to ACC = var2B
+	ADD		;ACC = var2B + var2B
+	STAC 2B_add_2B	;Store ACC in 2B_add_2B
+	OUT		;Display ACC
+
+	LDAC varA9	;ACC = varA9
+	MVAC		;R = varA9
+	LDAC var2B	;ACC = var2B
+	AND		;ACC = var2B AND varA9
+	STAC A9_and_2B	;Store ACC in A9_and_2B
+	OUT		;Display ACC
+
+	LDAC varA9	;ACC = varA9
+	MVAC		;R = varA9
+	LDAC var2B	;ACC = var2B
+	OR		;ACC = var2B OR varA9
+	STAC A9_or_2B	;Store ACC in A9_or_2B
+	OUT		;Display ACC
+
+	LDAC varA9	;ACC = varA9
+	ASHR		;ACC = ACC>>1
+	STAC A9_ashr	;Store ACC in A9_ashr
+	OUT		;Display ACC
+
+	LDAC varAF	;ACC = varAF
+	INC		;ACC = varAF + 1
+	STAC AF_inc	;Store ACC in AF_inc
+	OUT		;Display ACC
+	
+	LDAC varD1	;ACC = varD1
+	NOT		;ACC = ~varD1
+	STAC D1_not	;Store ACC in D1_not	
+	OUT		;Display ACC
+	
+	HALT		;Stop Execution
+		
+				
+	

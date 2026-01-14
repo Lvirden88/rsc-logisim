@@ -1,0 +1,19 @@
+;Lisa Virden
+;program1.txt
+;Compute F - A (in hex and display the result)
+
+JMP start ;Jump to 'start' label
+
+;Variables
+var1: F
+var2: A
+
+start:
+	LDAC var2    ;Load var2 into ACC
+	MVAC         ;Move ACC to R
+	LDAC var1    ;Load var1 into ACC
+	SUB	     ;ACC = var1 - var2
+	OUT   	     ;Send ACC contents to Output Register
+	HALT         ;Stop execution
+	
+	
